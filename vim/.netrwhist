@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/hugo/projects/variedades/variedades'
+let g:netrw_dirhist_2='/Users/hugo/projects/publicacao-core'
+let g:netrw_dirhist_3='/Users/hugo/projects/variedades'
+let g:netrw_dirhist_4='/Users/hugo/projects/variedades/variedades'
+let g:netrw_dirhist_5='/Users/hugo/projects/caldeiraodohuck'
+let g:netrw_dirhist_6='/Users/hugo/projects/caldeiraodohuck/caldeiraodohuck'
+let g:netrw_dirhist_7='/Users/hugo/projects'
+let g:netrw_dirhist_8='/Users/hugo/projects/faustao'
