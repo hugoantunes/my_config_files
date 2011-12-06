@@ -45,7 +45,6 @@ alias grep="egrep --colour"
 
 #path do BREW
 PATH_BREW=/usr/local/Cellar/
-#export PATH=$PATH_BREW/python/2.6.5/bin:$PATH_BREW/postgresql/8.4.3/bin/:$PATH
 
 # git
 function parse_git_branch {
@@ -69,27 +68,59 @@ proml
 
 source ~/.git-completion.bash
 
-apps=([0]='programa' 
+apps_variedades=([0]='programa' 
       [1]='plantao'
       [2]='quadros'
       [3]='enquete_variedades'
       [4]='teste_personalidade_variedades'
-      [5]='seo'
-      [6]='apresentador'
-      [7]='teste_personalidade'
-      [8]='enquetemultimidia'
-      [9]='materia_variedades'
-      [10]='galeria_variedades'
-      [11]='menu_variedades'
-      [12]='comum_variedades')
+      [5]='apresentador'
+      [6]='materia_variedades'
+      [7]='galeria_variedades'
+      [8]='menu_variedades'
+      [9]='comum_variedades'
+      [10]='participantes')
+
+apps_entretenimento=([0]='seo'
+      [1]='enquetemultimidia'
+      [2]='teste_personalidade')
+
+function digivolve_para(){
+    pushd ~/projects/
+    echo "### APPS VARIEDADES ###"
+    for i in ${apps_variedades[@]}
+    do
+        echo "### ${i} ###"
+        cd ~/projects/variedades/${i} && 
+        git checkout $1
+        echo
+    done  
+    echo "### APPS NÃO VARIEDADES ###"
+    for i in ${apps_entretenimento[@]}
+    do
+        echo "### ${i} ###"
+        cd ~/projects/${i} && 
+        git checkout $1
+        echo
+    done
+    popd
+}
 
 function genkidama(){
     workon $1
     pushd ~/projects/
-    for i in ${apps[@]}
+    echo "### APPS VARIEDADES ###"
+    for i in ${apps_variedades[@]}
+    do
+        echo "### ${i} ###"
+        cd ~/projects/variedades/${i} && pip install -e . --no-deps
+        echo        
+    done  
+    echo "### APPS NÃO VARIEDADES ###"
+    for i in ${apps_entretenimento[@]}
     do
         echo "### ${i} ###"
         cd ~/projects/${i} && pip install -e . --no-deps
+        echo        
     done  
     popd
 }
@@ -97,20 +128,42 @@ function genkidama(){
 function power_of_destruction(){
     workon $1
     pushd ~/projects/
-    for i in ${apps[@]}
+    echo "### APPS VARIEDADES ###"
+    for i in ${apps_variedades[@]}
     do
         echo "### ${i} ###"
-        pip uninstall ${i}
+        pip uninstall ${i} -y
+        echo        
+    done     
+    echo "### APPS NÃO VARIEDADES ###"
+    for i in ${apps_entretenimento[@]}
+    do
+        echo "### ${i} ###"
+        pip uninstall ${i} -y
+        echo        
     done  
     popd
 }
 
 function get_over_here(){
     pushd ~/projects/
-    for i in ${apps[@]}
+    echo "### APPS VARIEDADES ###"
+    for i in ${apps_variedades[@]}
     do
         echo "### ${i} ###"
-        cd ~/projects/${i} && git pull
+        cd ~/projects/variedades/${i} && 
+        git branch &&
+        git pull
+        echo        
+    done
+    echo "### APPS NÃO VARIEDADES ###"
+    for i in ${apps_entretenimento[@]}
+    do
+        echo "### ${i} ###"
+        cd ~/projects/${i} && 
+        git branch &&
+        git pull
+        echo        
     done
     popd
 }

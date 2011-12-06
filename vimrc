@@ -116,6 +116,24 @@ au! BufRead,BufNewFile *.scss               setfiletype scss.css
 au! FileType python set omnifunc=syntaxcomplete#Complete
 au! FileType css    set omnifunc=csscomplete#CompleteCSS
 
+" Mappings to move lines up and down
+nnoremap <C-Down> :m+<CR>==
+nnoremap <C-Up> :m-2<CR>==
+inoremap <C-Down> <Esc>:m+<CR>==gi
+inoremap <C-Up> <Esc>:m-2<CR>==gi
+vnoremap <C-Down> :m'>+<CR>gv=gv
+vnoremap <C-Up> :m-2<CR>gv=gv
+
+" Mappings to indent/unindent lines
+nnoremap <C-Left> <<
+nnoremap <C-Right> >>
+vnoremap <C-Left> <gv
+vnoremap <C-Right> >gv
+
+
+" Clear highlights
+nmap <silent> <ESC> :silent noh<CR>
+
 
 python << EOF
 import os
@@ -125,4 +143,6 @@ for p in sys.path:
     if os.path.isdir(p):
         vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 EOF
+
+
 
