@@ -1,7 +1,4 @@
-#postgres
-#export PGDATA=/usr/local/var/postgres/
 
-export PYTHONSTARTUP=$HOME/.pythonstartup 
 export VERSIONER_PYTHON_PREFER_32_BIT=yes
 export TM_PYCHECKER=pyflakes
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
@@ -25,8 +22,16 @@ export PATH=/usr/local/Cellar/mysql/bin:$PATH
 export PATH=/usr/local/Cellar/ruby/1.9.1-p378/bin:$PATH
 export PATH=$HOME/.gem/ruby/1.9.1/bin:$PATH
 
+# postgres
+export PATH=/Library/PostgreSQL/9.1/bin/$PATH
+export PGDATA=/usr/local/var/postgres/
 
-
+function start_postgres(){
+    pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+}
+function stop_postgres(){
+    pg_ctl -D /usr/local/var/postgres stop -s -m fast
+}
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -190,3 +195,5 @@ function status_busca(){
 }
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+[[ -s "/Users/hugo/.rvm/scripts/rvm" ]] && source "/Users/hugo/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
