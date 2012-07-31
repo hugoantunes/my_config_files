@@ -44,6 +44,8 @@ fi
 alias ll="ls -l"
 alias la="ls -la"
 alias ls="ls -G"
+alias sobe_ipypi="python2.6 setup.py -q sdist upload --show-response -r ipypiprod"
+alias sobe_pypi="python2.6 setup.py -q sdist upload --show-response -r pypiprod"
 
 alias egrep="egrep --colour"
 alias grep="egrep --colour"

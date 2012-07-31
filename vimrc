@@ -134,6 +134,9 @@ vnoremap <C-Right> >gv
 " Clear highlights
 nmap <silent> <ESC> :silent noh<CR>
 
+autocmd BufWritePost *.py call Flake8()
+let g:flake8_ignore="E501"
+
 
 python << EOF
 import os
