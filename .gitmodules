@@ -27,3 +27,9 @@
 [submodule "vim/bundle/zencoding-vim"]
 	path = vim/bundle/zencoding-vim
 	url = git://github.com/tpope/vim-surround.git
+[submodule "vim/bundle/tlib_vim"]
+	path = vim/bundle/tlib_vim
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "vim/bundle/vim-addon-mw-utils"]
+	path = vim/bundle/vim-addon-mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
