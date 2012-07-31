@@ -6,9 +6,6 @@
     path = vim/bundle/nerdtree
     url = https://github.com/scrooloose/nerdtree.git
         
-[submodule "vim/bundle/jshint"]
-    path = vim/bundle/jshint
-    url = git://github.com/manalang/jshint.vim.git
 [submodule "vim/bundle/snipmate.vim"]
 	path = vim/bundle/snipmate.vim
 	url = git://github.com/garbas/vim-snipmate.git

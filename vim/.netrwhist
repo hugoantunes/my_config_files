@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/Users/hugo/projects/novelas'
-let g:netrw_dirhist_2='/Users/hugo/projects'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/hugoantunes/projects/my_config_files'
+let g:netrw_dirhist_2='/Users/hugoantunes/projects/heroku'
+let g:netrw_dirhist_3='/Users/hugoantunes/projects/heroku/portifolio_helena'
+let g:netrw_dirhist_4='/Users/hugoantunes/projects/my_config_files'
