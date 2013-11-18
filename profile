@@ -1,14 +1,14 @@
-
 export VERSIONER_PYTHON_PREFER_32_BIT=yes
 export TM_PYCHECKER=pyflakes
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+
 # virtualenv wrapper configuration
 export WORKON_HOME=$HOME/envs
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     . /usr/local/bin/virtualenvwrapper.sh
 fi
 
-export EDITOR=vim
+export EDITOR=mvim
 export CLICOLOR="auto"
 export GREP_COLOR="4;33"
 export GREP_OPTIONS="--color=auto"
@@ -52,6 +52,23 @@ alias grep="egrep --colour"
 
 #path do BREW
 PATH_BREW=/usr/local/Cellar/
+
+#mysql
+function start_mysql {
+    mysql.server stop || true
+    diskutil erasevolume HFS+ 'ramdisk' `hdiutil attach -nomount ram://1165430`
+    mysql_install_db --datadir=/Volumes/ramdisk --basedir=`brew --prefix mysql`
+    mysql.server start --datadir=/Volumes/ramdisk
+    #mysql -u root -e "create database novelas;create database novelas_test;"
+    #to cagando se a proxima linha der erro pq eh quando o arquivo nao existe
+    #mysql -u root novelas < .dump-novelas.sql || true
+}
+
+function stop_mysql {
+    mysqldump --datadir=/Volumes/ramdisk -u root novelas > .dump-novelas.sql || true
+    mysql.server stop || true
+    diskutil unmountDisk "ramdisk"
+}
 
 # git
 function parse_git_branch {
@@ -185,7 +202,7 @@ function stop_busca(){
 
 function start_busca(){
     pushd ~/projects/barramento/ && make start &&
-    cd ~/projects/busca-nova-plataforma/ && make start &&
+    cd ~/projects/solr-app-semantica/ && bash start-solr.sh &&
     popd
 }
 
@@ -196,6 +213,9 @@ function status_busca(){
     popd
 }
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+alias virtuoso_start="cd /usr/local/Cellar/virtuoso/6.1.4/var/lib/virtuoso/db/ && sudo virtuoso-t -f"
+export VIRTUOSO_HOME=/usr/local/Cellar/virtuoso/6.1.4
 
+#RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [[ -s "/Users/hugo/.rvm/scripts/rvm" ]] && source "/Users/hugo/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
