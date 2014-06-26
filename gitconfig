@@ -15,3 +15,5 @@
 [alias]
 	st = status
 	cm = commit -m 
+[push]
+	default = matching
