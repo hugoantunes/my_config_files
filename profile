@@ -92,7 +92,7 @@ proml
 
 source ~/.git-completion.bash
 
-apps_variedades=([0]='programa' 
+apps_variedades=([0]='programa'
       [1]='plantao'
       [2]='quadros'
       [3]='enquete_variedades'
@@ -114,15 +114,15 @@ function digivolve_para(){
     for i in ${apps_variedades[@]}
     do
         echo "### ${i} ###"
-        cd ~/projects/variedades/${i} && 
+        cd ~/projects/variedades/${i} &&
         git checkout $1
         echo
-    done  
+    done
     echo "### APPS NÃO VARIEDADES ###"
     for i in ${apps_entretenimento[@]}
     do
         echo "### ${i} ###"
-        cd ~/projects/${i} && 
+        cd ~/projects/${i} &&
         git checkout $1
         echo
     done
@@ -137,15 +137,15 @@ function genkidama(){
     do
         echo "### ${i} ###"
         cd ~/projects/variedades/${i} && pip install -e . --no-deps
-        echo        
-    done  
+        echo
+    done
     echo "### APPS NÃO VARIEDADES ###"
     for i in ${apps_entretenimento[@]}
     do
         echo "### ${i} ###"
         cd ~/projects/${i} && pip install -e . --no-deps
-        echo        
-    done  
+        echo
+    done
     popd
 }
 
@@ -157,15 +157,15 @@ function power_of_destruction(){
     do
         echo "### ${i} ###"
         pip uninstall ${i} -y
-        echo        
-    done     
+        echo
+    done
     echo "### APPS NÃO VARIEDADES ###"
     for i in ${apps_entretenimento[@]}
     do
         echo "### ${i} ###"
         pip uninstall ${i} -y
-        echo        
-    done  
+        echo
+    done
     popd
 }
 
@@ -175,19 +175,19 @@ function get_over_here(){
     for i in ${apps_variedades[@]}
     do
         echo "### ${i} ###"
-        cd ~/projects/variedades/${i} && 
+        cd ~/projects/variedades/${i} &&
         git branch &&
         git pull
-        echo        
+        echo
     done
     echo "### APPS NÃO VARIEDADES ###"
     for i in ${apps_entretenimento[@]}
     do
         echo "### ${i} ###"
-        cd ~/projects/${i} && 
+        cd ~/projects/${i} &&
         git branch &&
         git pull
-        echo        
+        echo
     done
     popd
 }
@@ -219,3 +219,6 @@ export VIRTUOSO_HOME=/usr/local/Cellar/virtuoso/6.1.4
 #RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [[ -s "/Users/hugo/.rvm/scripts/rvm" ]] && source "/Users/hugo/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+#pearl
+source /Users/hugo/perl5/perlbrew/etc/bashrc
