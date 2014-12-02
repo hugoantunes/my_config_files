@@ -8,7 +8,7 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     . /usr/local/bin/virtualenvwrapper.sh
 fi
 
-export EDITOR=mvim
+export EDITOR=vim
 export CLICOLOR="auto"
 export GREP_COLOR="4;33"
 export GREP_OPTIONS="--color=auto"
@@ -16,7 +16,7 @@ export GREP_OPTIONS="--color=auto"
 #lib mysql
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
-export PATH=/usr/local/sbin/:/usr/local/bin:/usr/bin/:$PATH
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:$PATH
 export PATH=/usr/local/Cellar/mysql/bin:$PATH
 # ruby stuff
 export PATH=/usr/local/Cellar/ruby/1.9.1-p378/bin:$PATH
@@ -44,8 +44,8 @@ fi
 alias ll="ls -l"
 alias la="ls -la"
 alias ls="ls -G"
-alias sobe_ipypi="python2.6 setup.py -q sdist upload --show-response -r ipypiprod"
-alias sobe_pypi="python2.6 setup.py -q sdist upload --show-response -r pypiprod"
+alias sobe_ipypi="python setup.py sdist upload -r ipypi-local"
+alias sobe_pypi="python setup.py sdist upload -r pypi-local"
 
 alias egrep="egrep --colour"
 alias grep="egrep --colour"
@@ -92,106 +92,9 @@ proml
 
 source ~/.git-completion.bash
 
-apps_variedades=([0]='programa'
-      [1]='plantao'
-      [2]='quadros'
-      [3]='enquete_variedades'
-      [4]='teste_personalidade_variedades'
-      [5]='apresentador'
-      [6]='materia_variedades'
-      [7]='galeria_variedades'
-      [8]='menu_variedades'
-      [9]='comum_variedades'
-      [10]='participantes')
-
-apps_entretenimento=([0]='seo'
-      [1]='enquetemultimidia'
-      [2]='teste_personalidade')
-
-function digivolve_para(){
-    pushd ~/projects/
-    echo "### APPS VARIEDADES ###"
-    for i in ${apps_variedades[@]}
-    do
-        echo "### ${i} ###"
-        cd ~/projects/variedades/${i} &&
-        git checkout $1
-        echo
-    done
-    echo "### APPS NÃO VARIEDADES ###"
-    for i in ${apps_entretenimento[@]}
-    do
-        echo "### ${i} ###"
-        cd ~/projects/${i} &&
-        git checkout $1
-        echo
-    done
-    popd
+function pipinstall(){
+    pip install $1 --extra-index-url=http://artifactory.globoi.com/artifactory/api/pypi/pypi-all/simple
 }
-
-function genkidama(){
-    workon $1
-    pushd ~/projects/
-    echo "### APPS VARIEDADES ###"
-    for i in ${apps_variedades[@]}
-    do
-        echo "### ${i} ###"
-        cd ~/projects/variedades/${i} && pip install -e . --no-deps
-        echo
-    done
-    echo "### APPS NÃO VARIEDADES ###"
-    for i in ${apps_entretenimento[@]}
-    do
-        echo "### ${i} ###"
-        cd ~/projects/${i} && pip install -e . --no-deps
-        echo
-    done
-    popd
-}
-
-function power_of_destruction(){
-    workon $1
-    pushd ~/projects/
-    echo "### APPS VARIEDADES ###"
-    for i in ${apps_variedades[@]}
-    do
-        echo "### ${i} ###"
-        pip uninstall ${i} -y
-        echo
-    done
-    echo "### APPS NÃO VARIEDADES ###"
-    for i in ${apps_entretenimento[@]}
-    do
-        echo "### ${i} ###"
-        pip uninstall ${i} -y
-        echo
-    done
-    popd
-}
-
-function get_over_here(){
-    pushd ~/projects/
-    echo "### APPS VARIEDADES ###"
-    for i in ${apps_variedades[@]}
-    do
-        echo "### ${i} ###"
-        cd ~/projects/variedades/${i} &&
-        git branch &&
-        git pull
-        echo
-    done
-    echo "### APPS NÃO VARIEDADES ###"
-    for i in ${apps_entretenimento[@]}
-    do
-        echo "### ${i} ###"
-        cd ~/projects/${i} &&
-        git branch &&
-        git pull
-        echo
-    done
-    popd
-}
-
 
 function stop_busca(){
     pushd ~/projects/barramento/ && make stop &&
@@ -213,12 +116,17 @@ function status_busca(){
     popd
 }
 
-alias virtuoso_start="cd /usr/local/Cellar/virtuoso/6.1.4/var/lib/virtuoso/db/ && sudo virtuoso-t -f"
-export VIRTUOSO_HOME=/usr/local/Cellar/virtuoso/6.1.4
+alias virtuoso_start="cd /usr/local/Cellar/virtuoso/6.1.7/var/lib/virtuoso/db/ && sudo virtuoso-t -f"
+export VIRTUOSO_HOME=/usr/local/Cellar/virtuoso/6.1.7
 
 #RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [[ -s "/Users/hugo/.rvm/scripts/rvm" ]] && source "/Users/hugo/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-#pearl
+#perl
 source /Users/hugo/perl5/perlbrew/etc/bashrc
+
+export GOPATH=$HOME/go
+export GOROOT=`go env GOROOT`
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
