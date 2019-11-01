@@ -92,41 +92,11 @@ proml
 
 source ~/.git-completion.bash
 
-function pipinstall(){
-    pip install $1 --extra-index-url=http://artifactory.globoi.com/artifactory/api/pypi/pypi-all/simple
-}
-
-function stop_busca(){
-    pushd ~/projects/barramento/ && make stop &&
-    cd ~/projects/busca-nova-plataforma/ && make stop &&
-    popd
-}
-
-
-function start_busca(){
-    pushd ~/projects/barramento/ && make start &&
-    cd ~/projects/solr-app-semantica/ && bash start-solr.sh &&
-    popd
-}
-
-function status_busca(){
-    pushd ~/projects/barramento/ && make status &&
-    echo "solr"
-    cd ~/projects/busca-nova-plataforma/ && make status &&
-    popd
-}
-
 alias virtuoso_start="cd /usr/local/Cellar/virtuoso/6.1.7/var/lib/virtuoso/db/ && sudo virtuoso-t -f"
 export VIRTUOSO_HOME=/usr/local/Cellar/virtuoso/6.1.7
 
 #RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [[ -s "/Users/hugo/.rvm/scripts/rvm" ]] && source "/Users/hugo/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-#perl
-source /Users/hugo/perl5/perlbrew/etc/bashrc
-
-export GOPATH=$HOME/go
-export GOROOT=`go env GOROOT`
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
