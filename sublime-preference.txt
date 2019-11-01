@@ -1,6 +1,7 @@
+// Settings in here override those in "Default/Preferences.sublime-settings",
+// and are overridden in turn by syntax-specific settings.
 {
     "bold_folder_labels": true,
-    "color_scheme": "Packages/User/Espresso Libre (SL).tmTheme",
     "enable_tab_scrolling": false,
     "font_size": 12,
     "highlight_line": true,
@@ -11,7 +12,6 @@
     [
         80
     ],
-    "theme": "Spacegray Eighties.sublime-theme",
     "translate_tabs_to_spaces": true,
     "trim_trailing_white_space_on_save": true,
     "use_simple_full_screen": true,
