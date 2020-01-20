@@ -100,3 +100,5 @@ export VIRTUOSO_HOME=/usr/local/Cellar/virtuoso/6.1.7
 [[ -s "/Users/hugo/.rvm/scripts/rvm" ]] && source "/Users/hugo/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+alias kill_hideme="sudo killall -HUP mDNSResponder && sudo pfctl -F all -f ~/Library/Application\ Support/me.hide.macapp/pf.hide.me.conf"
