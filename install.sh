@@ -12,10 +12,6 @@ echo ".profile"
 rm -f ~/.profile
 ln -s `pwd`/profile ~/.profile
 
-echo ".pythonstartup"
-rm -f ~/.pythonstartup
-ln -s `pwd`/pythonstartup ~/.pythonstartup
-
 echo ".git-completion.bash"
 rm -f ~/.git-completion.bash
 ln -s `pwd`/git-completion.bash ~/.git-completion.bash
