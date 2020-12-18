@@ -1,10 +1,9 @@
+export TM_PYCHECKER=pyflakes
+
 export EDITOR=vim
 export CLICOLOR="auto"
 export GREP_COLOR="4;33"
 export GREP_OPTIONS="--color=auto"
-
-#lib mysql
-#export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:$PATH
 export PATH=/usr/local/Cellar/mysql/bin:$PATH
@@ -52,7 +51,7 @@ PS4='+ '
 }
 proml
 
-source ~/.git-completion.bash
+# # source ~/.git-completion.bash
 
 #RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
@@ -61,3 +60,17 @@ source ~/.git-completion.bash
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 alias kill_hideme="sudo killall -HUP mDNSResponder && sudo pfctl -F all -f ~/Library/Application\ Support/me.hide.macapp/pf.hide.me.conf"
+
+eval "$(pyenv init -)"
+# eval "$(pipenv --completion)"
+alias prun="pipenv run"
+
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
+export PATH="$HOME/.poetry/bin:$PATH"
