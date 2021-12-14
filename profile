@@ -61,10 +61,6 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 alias kill_hideme="sudo killall -HUP mDNSResponder && sudo pfctl -F all -f ~/Library/Application\ Support/me.hide.macapp/pf.hide.me.conf"
 
-eval "$(pyenv init -)"
-# eval "$(pipenv --completion)"
-alias prun="pipenv run"
-
 export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
@@ -74,3 +70,6 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"

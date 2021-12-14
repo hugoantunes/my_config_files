@@ -1,151 +1,100 @@
+" Don't try to be vi compatible
+set nocompatible
+
+" Helps force plugins to load correctly when it is turned back on below
+filetype off
+
+" TODO: Load plugins here (pathogen or vundle)
+
+" Turn on syntax highlighting
 syntax on
 
-
-filetype on
-filetype plugin on
+" For plugins to load correctly
 filetype plugin indent on
 
+" TODO: Pick a leader key
+" let mapleader = ","
 
-set autoindent
-set autoread
-set backspace=2 
-set cursorline
-set directory=/tmp
-set expandtab
-set ignorecase 
-set incsearch
-set laststatus=2
-set lcs=tab:\»\ 
-set list
-set nocompatible
-set nonumber
-set noswapfile
-set nowrap
-set pastetoggle=<F2>
+" Security
+set modelines=0
+
+" Show line numbers
+set number
+
+" Show file stats
 set ruler
-set scrolloff=3
-set shiftwidth=4
-set smartcase
-set statusline=%{fugitive#statusline()}\:\ %F%m%=%y\ [%l-%L,%v]\ 
-set tabstop=4
-set tags+=$HOME/.vim/tags/python.ctags
+
+" Blink cursor on error instead of beeping (grr)
 set visualbell
-set wildignore+=*.pyc,**/cache/**
-set wildmode=list:longest
 
+" Encoding
+set encoding=utf-8
 
-if has("gui_running")
-    cd ~/Projects
-    set guifont=Menlo\ Regular:h13
-    set guioptions=egmrt
-    set fuoptions=maxvert,maxhorz
-    "highlight NonText ctermfg=bg guifg=bg " Hides ~ after EOF
-endif
+" Whitespace
+set wrap
+set textwidth=79
+set formatoptions=tcqrn1
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set noshiftround
 
+" Cursor motion
+set scrolloff=3
+set backspace=indent,eol,start
+set matchpairs+=<:> " use % to jump between pairs
+runtime! macros/matchit.vim
 
-let mapleader = " "
+" Move up/down editor lines
+nnoremap j gj
+nnoremap k gk
 
-let g:explVertical=1    " open vertical split window
-let g:explSplitRight=1  " Put new window to the right of the explorer
-let g:explStartRight=0  " new windows go to right of explorer window
+" Allow hidden buffers
+set hidden
 
+" Rendering
+set ttyfast
 
-" Disable <a> underline in html files
-highlight link htmlLink NONE
+" Status bar
+set laststatus=2
 
+" Last line
+set showmode
+set showcmd
 
-" Pathogen
-call pathogen#infect()
+" Searching
+nnoremap / /\v
+vnoremap / /\v
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+map <leader><space> :let @/=''<cr> " clear search
 
+" Remap help key.
+inoremap <F1> <ESC>:set invfullscreen<CR>a
+nnoremap <F1> :set invfullscreen<CR>
+vnoremap <F1> :set invfullscreen<CR>
 
-" BufExplorer
-map <silent><leader>b <ESC>:BufExplorer<Enter>
+" Textmate holdouts
 
+" Formatting
+map <leader>q gqip
 
-" NERDTree
-map <silent><leader>n <ESC>:NERDTreeToggle<Enter>
+" Visualize tabs and newlines
+set listchars=tab:▸\ ,eol:¬
+" Uncomment this to enable by default:
+" set list " To enable by default
+" Or use your leader key + l to toggle on/off
+map <leader>l :set list!<CR> " Toggle tabs and EOL
 
-let g:NERDTreeChDirMode=2
-
-
-" Command-T Options
-let g:CommandTMaxHeight=15
-
-
-" ConqueTerm
-map <silent><leader>s <ESC>:ConqueTermSplit bash --init-file ~/.bash_profile<Enter>
-
-let g:ConqueTerm_CloseOnEnd = 1
-
-au! FileType conque_term set nocursorline
-
-
-" Ack
-nmap <leader>a <Esc>:Ack 
-
-let g:path_to_search_app = "/usr/local/bin/ack"
-
-
-" JSBeautifier
-command! Jsbeautify call g:Jsbeautify()<cr>
-
-
-" Windows
-map <C-S-Left> <c-w>4<
-map <C-S-Right> <c-w>4>
-map <C-S-Up> <c-w>4-
-map <C-S-Down> <c-w>4+
-
-
-" Buffers
-nnoremap <F5> :buffers<CR>:buffer<Space>
-
-
-" Tabs
-noremap <silent> ,t <ESC>:tabnew<CR>
-noremap <silent> ,c <ESC>:tabclose<CR>
-noremap <silent> <S-h> <ESC>:tabprevious<CR>
-noremap <silent> <S-j> <ESC>:tabfirst<CR>
-noremap <silent> <S-k> <ESC>:tablast<CR>
-noremap <silent> <S-l> <ESC>:tabnext<CR>
-
-
-au! BufRead,BufNewFile *.migration,*.wsgi   setfiletype python
-au! BufRead,BufNewFile Capfile,Vagrantfile  setfiletype ruby
-au! BufRead,BufNewFile *.scss               setfiletype scss.css
-au! FileType python set omnifunc=syntaxcomplete#Complete
-au! FileType css    set omnifunc=csscomplete#CompleteCSS
-
-" Mappings to move lines up and down
-nnoremap <C-Down> :m+<CR>==
-nnoremap <C-Up> :m-2<CR>==
-inoremap <C-Down> <Esc>:m+<CR>==gi
-inoremap <C-Up> <Esc>:m-2<CR>==gi
-vnoremap <C-Down> :m'>+<CR>gv=gv
-vnoremap <C-Up> :m-2<CR>gv=gv
-
-" Mappings to indent/unindent lines
-nnoremap <C-Left> <<
-nnoremap <C-Right> >>
-vnoremap <C-Left> <gv
-vnoremap <C-Right> >gv
-
-
-" Clear highlights
-nmap <silent> <ESC> :silent noh<CR>
-
-autocmd BufWritePost *.py call Flake8()
-let g:flake8_ignore="E501"
-
-
-python << EOF
-import os
-import sys
-import vim
-for p in sys.path:
-    if os.path.isdir(p):
-        vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
-EOF
-
-
-
+" Color scheme (terminal)
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+" put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+" in ~/.vim/colors/ and uncomment:
+" colorscheme solarized
